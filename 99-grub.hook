@@ -12,4 +12,4 @@ Target = usr/sbin/grub*
 Description = Installing GRUB to EFI system and updating configuration...
 When = PostTransaction
 Depends = grub
-Exec = /usr/bin/bash -c 'if [ ! -f /run/grub-update.lock ]; then touch /run/grub-update.lock; export LC_ALL=C; EFI_DIR="/boot"; if [ ! -d "$EFI_DIR/EFI" ]; then EFI_DIR="/boot/efi"; fi; grub-install --target=x86_64-efi --efi-directory="$EFI_DIR" --bootloader-id=GRUB --modules="tpm" --disable-shim-lock --removable && grub-mkconfig -o /boot/grub/grub.cfg; rm -f /run/grub-update.lock; fi'
+Exec = /usr/bin/bash -c 'if [ ! -f /run/grub-update.lock ]; then touch /run/grub-update.lock; export LC_ALL=C; EFI_DIR="/boot"; if [ ! -d "$EFI_DIR/EFI" ]; then EFI_DIR="/boot/efi"; fi; grub-install --target=x86_64-efi --efi-directory="$EFI_DIR" --bootloader-id=GRUB --modules="tpm" --disable-shim-lock; grub-install --target=x86_64-efi --efi-directory="$EFI_DIR" --bootloader-id=GRUB --modules="tpm" --disable-shim-lock --removable; grub-mkconfig -o /boot/grub/grub.cfg; rm -f /run/grub-update.lock; fi'
